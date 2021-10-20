@@ -133,3 +133,19 @@ dmypy.json
 
 # Import File!
 *.ini
+
+# Using CDN
+app/static/css/bootstrap/
+app/static/css/billboard.css
+app/static/css/billboard.min.css
+app/static/css/fontawesome/
+app/static/font/*
+app/static/js/bootstrap/
+app/static/js/fontawesome/
+app/static/js/jquery/
+app/static/js/popper/
+app/static/js/billboard.js
+app/static/js/billboard.min.js
+app/static/js/billboard.pkgd.js
+app/static/js/billboard.pkgd.min.js
+app/static/js/bootstrap.min.js

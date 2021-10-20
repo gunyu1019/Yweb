@@ -1,0 +1,373 @@
+@font-face{
+    font-family: "sunflower";
+    src: url("../font/sunflower.ttf");
+}
+
+@font-face{
+    font-family: "NotoSansKR-Bold";
+    src: url("../font/Noto_Sans_KR/NotoSansKR-Bold.otf");
+}
+
+@font-face{
+    font-family: "NotoSansKR-Medium";
+    src: url("../font/Noto_Sans_KR/NotoSansKR-Medium.otf");
+}
+
+body, html {
+    margin: 0;
+    color: white;
+    background: #23272b;
+}
+
+section {
+    position: relative;
+    overflow: hidden;
+}
+
+.main{
+    width: 100%;
+    height: 100vh;
+}
+
+.topic_group {
+    display: grid;
+    text-align: center;
+    position: absolute;
+    top: 35%;
+    width: 100%;
+    place-items: center;
+}
+
+.topic_img {
+    display: block;
+    position: fixed;
+    top: 0;
+    background-image: url("../img/programing.png");
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+}
+
+.topic {
+    color: white;
+    font-family: NotoSansKR-Bold;
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.desc {
+    color: white;
+    font-family: sunflower;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.sns-group {
+    display: flex;
+    margin: 0;
+    padding: 30px 0;
+}
+
+.sns-button {
+    list-style: none;
+}
+
+.sns-button a{
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: block;
+    border: 2px solid white;
+    text-align: center;
+    margin: 0 10px;
+    border-radius: 10px;
+    padding: 6px;
+    box-sizing: border-box;
+    text-decoration: none;
+    box-shadow: inset 0 0 0 0 white;
+    transition: ease-out 0.5s;
+}
+
+.sns-button a:hover{
+    color: #fff;
+    cursor: pointer;
+    box-shadow: inset 0 -60px 0 0 white;
+}
+
+ul li a .fab {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 3px;
+    line-height: calc(60px - 13px);
+    font-size: 35px;
+    color: white;
+    transition: .5s;
+}
+
+ul li a .fas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 3px;
+    line-height: calc(60px - 13px);
+    font-size: 35px;
+    color: white;
+    transition: .5s;
+}
+
+ul li:nth-child(1) a:hover .fab {
+    color: #1DA1F2;
+}
+
+ul li:nth-child(2) a:hover .fab {
+    color: #181717;
+}
+
+ul li:nth-child(3) a:hover .fab {
+    color: #7289DA;
+}
+
+ul li:nth-child(4) a:hover .fab {
+    color: #9146FF;
+}
+
+ul li:nth-child(5) a:hover .fas {
+    color: #f54;
+}
+
+h3 {
+    color: white;
+    font-weight: bold;
+    font-family: NotoSansKR-Bold;
+    padding-bottom: 10px;
+    font-size: 35px;
+}
+
+.chart-title {
+    text-align: center;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.chart-loading {
+    text-align: center;
+    font-weight: 600;
+    color: darkgray;
+    font-size: 20px;
+}
+
+.about span {
+    color: white;
+    font-family: NotoSansKR-Bold;
+    display: block;
+    padding-left: 3px;
+    padding-bottom: 3px;
+    font-size: 20px;
+}
+
+.team span {
+    color: white;
+    font-family: NotoSansKR-Bold;
+    display: block;
+    padding-left: 3px;
+    padding-bottom: 3px;
+    font-size: 20px;
+}
+
+.line {
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-top:2px solid #aaa;
+    border-bottom:2px solid #aaa;
+}
+
+.grid {
+    padding-top: 15px;
+}
+
+.grid_programing {
+    padding-top: 15px;
+}
+
+.flex_team a {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+@media screen and (min-width: 1200px) {
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .grid_programing {
+        display: grid;
+        padding-left: 30px;
+        padding-right: 30px;
+        grid-template-columns: 1fr 2fr;
+    }
+
+    .flex_team {
+        display: flex;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .grid_programing img {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .flex_team a {
+        flex: 0 0 calc(50% - 30px);
+        max-width: 50%;
+    }
+}
+
+.grid-item .fas {
+    font-size: 30px;
+}
+
+.grid-item h4 {
+    display: initial;
+    padding-left: 10px;
+    font-size: 30px;
+    font-weight: 300;
+    font-family: Sunflower;
+}
+
+.grid-item span {
+    display: block;
+    padding-left: 10px;
+    font-size: 15px;
+    font-family: NotoSansKR-Medium;
+}
+
+.fa-python {
+    color: #3776AB;
+}
+
+.fa-python:hover {
+    color: white;
+}
+
+.fa-php {
+    color: #777BB4;
+}
+
+.fa-php:hover {
+    color: white;
+}
+
+.fa-node-js {
+    color: #339933;
+}
+
+.fa-node-js:hover {
+    color: white;
+}
+
+.flex_team a {
+    display: block;
+    margin: 15px;
+    height: 250px;
+    border-radius: 20px;
+    background: #3c3c3c;
+    align-items: center;
+}
+
+.flex_team a:hover{
+    margin: 15px;
+    height: 250px;
+    border-radius: 20px;
+    background: #3c3c3c;
+}
+.flex_team a .image1 {
+    background-image: url("../img/Cailco_Cheese.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 250px;
+    border-radius: 20px;
+    opacity: 1;
+}
+
+.flex_team a .image2 {
+    background-image: url("../img/HKdev.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 250px;
+    border-radius: 20px;
+    opacity: 1;
+}
+
+.box-caption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    opacity: 0;
+    color: #fff;
+    height: 280px;
+    width: calc(50% - 45px);
+    transition: opacity 0.25s ease;
+    background: rgba(35, 39, 43, 0.7);
+}
+
+.box-caption:hover {
+    opacity: 1;
+}
+
+.box-caption span {
+    font-family: NotoSansKR-Bold;
+    font-weight: bold;
+    font-size: 30px;
+    color: white;
+    text-align: center;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip-text-out:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+.bb-tooltip tbody tr {
+    color: black;
+}
+
+.bb-legend-item text {
+    fill: white;
+}
