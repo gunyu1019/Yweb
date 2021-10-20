@@ -60,3 +60,13 @@ def repositories():
         jsonify(result),
         200
     )
+
+
+@bp.route("/projects", methods=['GET'])
+def repositories():
+    return "Hello World!"
+
+
+@bp.route("/teams", methods=['GET'])
+def repositories():
+    return "Hello World!"
