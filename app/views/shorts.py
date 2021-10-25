@@ -3,8 +3,8 @@ from flask import render_template
 
 
 bp = Blueprint(
-    name="school",
-    import_name="school",
+    name="short",
+    import_name="short",
     url_prefix="/s"
 )
 

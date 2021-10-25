@@ -63,10 +63,10 @@ def repositories():
 
 
 @bp.route("/projects", methods=['GET'])
-def repositories():
+def projects():
     return "Hello World!"
 
 
 @bp.route("/teams", methods=['GET'])
-def repositories():
+def teams():
     return "Hello World!"
