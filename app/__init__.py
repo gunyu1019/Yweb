@@ -8,6 +8,7 @@ from app.directory import directory
 
 def create_app():
     app = Flask(__name__)
+    app.config['JSON_AS_ASCII'] = False
     log = logging.getLogger("app.create_app")
 
     views = [

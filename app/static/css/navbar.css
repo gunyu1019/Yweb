@@ -1,0 +1,18 @@
+.navbar {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.navbar .navbar-brand {
+    padding: 5px 8px 5px 8px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.navbar .nav-item {
+    padding: 2px 5px 2px 5px;
+    font-size: 15px;
+}
