@@ -1,0 +1,45 @@
+.navbar {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    width: 100%;
+
+    background: #1e212580;
+}
+
+.navbar .navbar-brand {
+    padding: 5px 8px 5px 8px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.navbar .nav-item {
+    padding: 8px 5px 8px 5px;
+    font-size: 15px;
+}
+
+.navbar .nav-item a {
+    display: inline-block;
+    position: relative;
+    color: #dedede !important;
+    font-weight: 600;
+}
+
+.navbar .nav-item a:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #dedede !important;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.navbar .nav-item a:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}

@@ -1,0 +1,56 @@
+@font-face{
+    font-family: "NanumSquareRound-Bold";
+    src: url("../font/NanumFont/NanumSquareRoundB.ttf");
+}
+
+@font-face{
+    font-family: "NanumSquareRound-ExtraBold";
+    src: url("../font/NanumFont/NanumSquareRoundEB.ttf");
+}
+
+@font-face{
+    font-family: "NanumSquareRound-Medium";
+    src: url("../font/NanumFont/NanumSquareRoundR.ttf");
+}
+
+@font-face{
+    font-family: "NotoSansKR-Bold";
+    src: url("../font/NotoSansKR/NotoSansKR-Bold.otf");
+}
+
+@font-face{
+    font-family: "NotoSansKR-Medium";
+    src: url("../font/NotoSansKR/NotoSansKR-Medium.otf");
+}
+
+body {
+    margin: 0;
+    color: white;
+    background: #1e2125;
+}
+
+.content {
+    margin-top: 120px;
+}
+
+h1 {
+    font-weight: 700;
+    font-family: NotoSansKR-Bold, "NotoSansKR-Bold", sans-serif;
+}
+
+h2 {
+    padding-top: 30px;
+    font-weight: 600;
+    font-family: NotoSansKR-Bold, "NotoSansKR-Bold", sans-serif;
+}
+
+h4 {
+    padding-top: 20px;
+    font-weight: 550;
+    font-family: NotoSansKR-Bold, "NotoSansKR-Bold", sans-serif;
+}
+
+*.indent {
+    display: block;
+    padding: 0 20px;
+}

@@ -1,0 +1,185 @@
+@font-face{
+    font-family: "NanumSquareRound-Bold";
+    src: url("../font/NanumFont/NanumSquareRoundB.ttf");
+}
+
+@font-face{
+    font-family: "NanumSquareRound-ExtraBold";
+    src: url("../font/NanumFont/NanumSquareRoundEB.ttf");
+}
+
+@font-face{
+    font-family: "NanumSquareRound-Medium";
+    src: url("../font/NanumFont/NanumSquareRoundR.ttf");
+}
+
+@font-face{
+    font-family: "NotoSansKR-Bold";
+    src: url("../font/NotoSansKR/NotoSansKR-Bold.otf");
+}
+
+@font-face{
+    font-family: "NotoSansKR-Medium";
+    src: url("../font/NotoSansKR/NotoSansKR-Medium.otf");
+}
+
+body {
+    margin: 0;
+    color: white;
+    background: #1e2125;
+}
+
+.content {
+    padding-top: 120px;
+}
+
+@media screen and (max-width: 1000px) {
+    .content {
+        margin-top: 60px;
+    }
+}
+
+.content .topic-group {
+    display: flex;
+}
+
+.content .topic-group .topic-image {
+    border-radius: 30px;
+    max-width: 160px;
+    max-height: 160px;
+    object-fit: contain;
+    margin: 15px;
+}
+
+.content .topic-group .topic-text {
+    margin: 15px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.content .topic-group .topic-text .topic-title {
+    color: white;
+    font-family: NotoSansKR-Bold, "NotoSansKR-Bold", sans-serif;
+    font-size: 40px;
+}
+
+.content .topic-group .topic-text .topic-category {
+    color: gray;
+    font-family: NotoSansKR-Medium, "NotoSansKR-Medium", sans-serif;
+    font-size: 18px;
+}
+
+.content .topic-group .topic-button {
+    margin: 15px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.content .topic-group .topic-button .topic-button-detail {
+    background: #373b3e;
+    align-items: center;
+    border-radius: 15px;
+    color: white;
+    display: flex;
+    margin: 3px;
+    width: 180px;
+    height: 40px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: ease-out 0.5s;
+}
+
+.content .topic-group .topic-button .topic-button-detail:hover {
+    color: #373b3e;
+    cursor: pointer;
+    box-shadow: inset -180px 0 0 0 whitesmoke;
+}
+
+.content .topic-group .topic-button .topic-button-detail .topic-button-icon {
+    flex: 0 0 40px;
+    font-size: 25px;
+    padding: 10px;
+}
+
+.content .topic-group .topic-button .topic-button-detail.github:hover {
+    color: #181717;
+}
+
+.content .topic-group .topic-button .topic-button-detail.website:hover {
+    color: #0070ff;
+}
+
+.content .topic-group .topic-button .topic-button-detail.delete:hover {
+    color: #ff253a;
+}
+
+.content .topic-group .topic-button .topic-button-detail .topic-button-title {
+    width: 100%;
+    text-align: center;
+}
+
+div.modal-dialog div.modal-content {
+    background: #23272a;
+    color: white;
+}
+
+div.modal-dialog div.modal-content div.modal-header {
+    border-bottom: 1px solid #1b1c1d;
+}
+
+div.modal-dialog div.modal-content div.modal-footer {
+    border-top: 1px solid #1b1c1d;
+}
+
+#contentViewer div {
+    font-size: 16px;
+    color: lightgray;
+}
+
+#contentViewer div p {
+    font-size: 16px;
+    color: lightgray;
+    margin: 0;
+}
+
+#contentViewer .toastui-editor-contents pre code {
+    text-shadow: none;
+}
+
+#contentViewer .toastui-editor-contents h1, #contentViewer .toastui-editor-contents h2, #contentViewer .toastui-editor-contents h3, #contentViewer .toastui-editor-contents h4, #contentViewer .toastui-editor-contents  h5 {
+    padding-top: 30px;
+}
+
+#contentViewer .toastui-editor-contents h1 {
+    font-weight: 700;
+}
+
+#contentViewer .toastui-editor-contents h2 {
+    font-weight: 650;
+}
+
+#contentViewer .toastui-editor-contents h3 {
+    font-weight: 600;
+}
+
+#contentViewer .toastui-editor-contents h4 {
+    font-weight: 550;
+}
+
+#contentViewer .toastui-editor-contents h5 {
+    font-weight: 500;
+}
+
+#contentViewer.toastui-editor-dark .toastui-editor-contents pre {
+    background: #282b2e;
+}
+
+#contentViewer.toastui-editor-dark .toastui-editor-contents pre code {
+    color: #a9b7c6;
+}
+
+#contentViewer.toastui-editor-dark .toastui-editor-contents ul {
+    color: #6a6e80;
+}

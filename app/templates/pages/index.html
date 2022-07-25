@@ -1,0 +1,101 @@
+{% extends 'layout.html' %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/hiphop5782/js@latest/typing/hakademy-typing.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/hiphop5782/js@latest/typing/hakademy-typing.min.js"></script>
+
+    <script>
+        $(function(){
+            let tag = document.querySelector(".typing");
+            new Hakademy.util.typing(tag, {
+                text:[
+                    " 고등학생",
+                    " 개발자",
+                    " 총기름(?)",
+                    " 건유1019",
+                    " 건유",
+                ]
+            });
+        });
+    </script>
+{% endblock %}
+{% block content %}
+    <section class="main" id="main">
+        <div class="topic-group">
+            <span class="topic">건유1019</span>
+            <span class="desc">I'm a programmer.</span>
+            <ul class="sns-group">
+                <li class="sns-button">
+                    <a href="https://github.com/gunyu1019">
+                        <i class="fab fa-github" aria-hidden="True"></i>
+                    </a>
+                </li>
+                <li class="sns-button">
+                    <a href="discord" class="tooltip-text-out">
+                        <i class="fab fa-discord" aria-hidden="True"></i>
+                        <span class="tooltip-text">건유1019#0001</span>
+                    </a>
+                </li>
+                <li class="sns-button">
+                    <a href="https://www.twitch.tv/gunyu1019">
+                        <i class="fab fa-twitch" aria-hidden="True"></i>
+                    </a>
+                </li>
+                <li class="sns-button">
+                    <a href="https://twitter.com/gunyu1019">
+                        <i class="fab fa-twitter" aria-hidden="True"></i>
+                    </a>
+                </li>
+                <li class="sns-button">
+                    <a href="https://blog.yonghyeon.com">
+                        <i class="fab fa-instagram" aria-hidden="True"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <div class="wave wave1" id="about"></div>
+    <div style="background: #373b3e">
+        <div class="container">
+            <section class="section-group about left">
+                <h3>👋 안녕하세요?</h3>
+                <span>저는 취미로 프로그래밍을 다루는 평범한 <p class="typing">고등학생</p>입니다.</span>
+                <span>다양한 커뮤니티를 운영해보고, 다양한 프로그램을 개발해 보면서 배우고 있습니다!</span>
+                <span>계속 발전해 나가도록 노력하겠습니다!</span>
+                <div class="jumpbox"></div>
+                <span>저는
+                    <img src="{{ url_for('static', filename='image/python.svg') }}" height="30px" alt="python"> 파이썬과
+                    <img src="{{ url_for('static', filename='image/kotlin.svg') }}" height="30px" alt="kotlin"> 코틀린을 주로 사용해가며 프로그래밍 하고 있습니다.
+                </span>
+                <span>이외에도 C언어와 C++, SQL,
+                    <img src="{{ url_for('static', filename='image/javascript.svg') }}" height="30px" alt="javascript"> 자바스크립트를 서브언어로 두고 필요할 때마다 쓰고 있습니다.
+                </span>
+            </section>
+        </div>
+    </div>
+    <div class="wave wave2"></div>
+    <div class="container">
+        <section class="section-group team right" id="team">
+            <h3>저는 이런 곳에서 활동하고 있어요!</h3>
+            <span>저는 다양한 커뮤니티에 기여하며 활동하고 있습니다.</span>
+            <span> 많은 커뮤니티가 있지만, 아래의 커뮤니티(개발팀)에서 주로 활동한답니다!</span>
+            <div class="jumpbox"></div>
+            <div class="team-flex">
+                <a href="https://calicocheese.xyz/" class="team-card-box">
+                    <img src="{{ url_for('static', filename='image/teams/cailcocheese.png') }}" />
+                    <div>
+                        <span class="team-card-topic">Cailco Cheese</span>
+                    </div>
+                </a>
+                <a href="https://hkdev.xyz/" class="team-card-box">
+                    <img src="{{ url_for('static', filename='image/teams/hkdev.png') }}" />
+                    <div>
+                        <span class="team-card-topic">HKDev</span>
+                        <span class="team-card-desc">국내 최대 디스코드 종합 개발 커뮤니티</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </div>
+{% endblock %}

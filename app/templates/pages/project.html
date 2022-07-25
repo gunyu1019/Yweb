@@ -1,0 +1,106 @@
+{% extends 'layout.html' %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/project.css') }}">
+    <script>
+        function addParameters(key, value) {
+            let location = window.location
+            let searchParams = new URLSearchParams(location.search);
+            searchParams.set(key, value);
+
+            window.location.href = `https://${location.host}${location.pathname}?${searchParams.toString()}`;
+        }
+
+        function updateParameter(key, value) {
+            let location = window.location
+            let searchParams = new URLSearchParams(location.search);
+            let pre_value = searchParams.get(key)
+            if (pre_value == null) {
+                searchParams.set(key, value);
+            } else if (!pre_value.split(',').includes(value)) {
+                let post_value = pre_value.split(',')
+                post_value.push(value)
+                searchParams.set(key, post_value.join(","));
+            } else if (pre_value.split(',').includes(value)) {
+                let post_value = pre_value.split(',')
+                post_value.splice(post_value.indexOf(value), 1)
+                if (post_value.length > 0) {
+                    searchParams.set(key, post_value.join(","));
+                } else {
+                    searchParams.delete(key)
+                }
+            }
+
+            window.location.href = `https://${location.host}${location.pathname}?${searchParams.toString()}`;
+        }
+
+        function deleteParameter(key) {
+            let location = window.location
+            let searchParams = new URLSearchParams(location.search);
+            searchParams.delete(key)
+
+            window.location.href = `https://${location.host}${location.pathname}?${searchParams.toString()}`;
+        }
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="wrapper">
+        <div class="container menu-group">
+            <div class="menu">
+                <span class="menu-title">프로젝트 검색</span>
+                <form role="search" data-search="" data-instant="true" autocomplete="off" action="/projects/"
+                      accept-charset="UTF-8" method="get">
+                    <i class="fas fa-search search-image"></i>
+                    <input class="search-box" type="search" name="query" id="query" placeholder="검색" autocomplete="off"
+                           aria-label="검색">
+                </form>
+                <span class="category-title">카테고리</span>
+                <div class="category-group">
+                    <a onclick="deleteParameter('category')"
+                       class="category {% if main_category == None %}category_active{% endif %} ">
+                        전체
+                    </a>
+                    {% for category in categories %}
+                        <a onclick="addParameters('category', '{{ category.id_string }}')"
+                           class="category {% if main_category == category.id_string %}category_active{% endif %} ">
+                            {{ category.name }}
+                        </a>
+                    {% endfor %}
+                </div>
+                <span class="category-title">프로그래밍 언어</span>
+                <div class="category-group">
+                    {% for language in languages %}
+                        <a onclick="updateParameter('language', '{{ language.id_string }}')"
+                           class="category {% if language.id_string in main_language %}category_active{% endif %} ">
+                            {{ language.name }}
+                        </a>
+                    {% endfor %}
+                </div>
+                {% if is_admin %}
+                    <span class="category-title">관리자 전용</span>
+                    <div class="category-group">
+                        <a href="{{ url_for('project.project_new') }}" class="category">
+                            작성하기
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="content-group">
+                {% for project in projects %}
+                    {% if project.contain_language(languages, main_language) and project.contain_category(categories, main_category) %}
+                        <a class="content" href="{{ url_for('project.detail', project_id=project.id) }}">
+                            {% if project.icon != None %}
+                                <img class="content-image"
+                                     src="data:image/png;base64,{{ project.icon_convert | safe }}"/>
+                            {% endif %}
+                            <div class="content-description">
+                                <span class="content-title">{{ project.title }}</span>
+                                <span class="content-category">카테고리: {{ project.s_category(categories) }}</span>
+                                <span class="content-language">{{ project.s_language(languages) }}</span>
+                            </div>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

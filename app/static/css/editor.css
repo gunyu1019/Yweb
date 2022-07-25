@@ -1,0 +1,175 @@
+@font-face{
+    font-family: "NanumSquareRound-Bold";
+    src: url("../font/NanumFont/NanumSquareRoundB.ttf");
+}
+
+@font-face{
+    font-family: "NanumSquareRound-ExtraBold";
+    src: url("../font/NanumFont/NanumSquareRoundEB.ttf");
+}
+
+@font-face{
+    font-family: "NanumSquareRound-Medium";
+    src: url("../font/NanumFont/NanumSquareRoundR.ttf");
+}
+
+@font-face{
+    font-family: "NotoSansKR-Bold";
+    src: url("../font/NotoSansKR/NotoSansKR-Bold.otf");
+}
+
+@font-face{
+    font-family: "NotoSansKR-Medium";
+    src: url("../font/NotoSansKR/NotoSansKR-Medium.otf");
+}
+
+body {
+    margin: 0;
+    color: white;
+    background: #1e2125;
+}
+
+.content {
+    padding-top: 120px;
+    margin-bottom: 120px;
+}
+
+form .title {
+    margin-left: 10px;
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: NotoSansKR-Medium, "NotoSansKR-Medium", sans-serif;
+    color: white;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+form .form-input {
+    border-color: #494c56;
+    background: #222;
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    vertical-align: middle;
+    color: white;
+}
+
+form .image .image-button-group .image-button {
+    width: 80px;
+    height: 40px;
+    background: #0060cf;
+    color: white;
+    margin: 2px;
+    padding: 6px 0;
+    border-radius: 10px;
+    font-size: 15px;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all .2s ease;
+}
+
+form .image .image-button-group .image-button:hover {
+    box-shadow: inset -80px 0 0 0 whitesmoke;
+    color: #0060cf;
+}
+
+form .image .image-button-group {
+    display: flex;
+}
+
+form .image .image-preview {
+    margin: 30px 30%;
+    width: 40%;
+}
+
+@media screen and (min-width: 1000px) {
+    .separate {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .separate-item {
+        margin: 10px;
+    }
+}
+
+/* checkbox */
+form .checkbox {
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+}
+
+form .checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+form .checkbox-marked {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 24px;
+    width: 24px;
+    border-radius: 4px;
+    background-color: #eeeeee;
+}
+
+form .checkbox:hover input ~ .checkbox-marked {
+    background-color: #ccc;
+}
+
+form .checkbox input:checked ~ .checkbox-marked {
+    background-color: #0060cf;
+}
+
+form .checkbox-marked:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+form .checkbox input:checked ~ .checkbox-marked:after {
+    display: block;
+}
+
+form .checkbox .checkbox-marked:after {
+    left: 7px;
+    top: 2px;
+    width: 10px;
+    height: 16px;
+    border: solid white;
+    border-width: 0 4px 4px 0;
+    transform: rotate(45deg);
+}
+
+form .bottom-button-group {
+    display: flex;
+    margin: 50px 0;
+    justify-content: center;
+}
+
+form .request-button {
+    border: none;
+    background-color: #0060cf;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 2px;
+    padding: 8px 0;
+    text-align: center;
+    text-decoration: none;
+    transition: all .2s ease;
+    width: 200px;
+}
+
+form .request-button:hover {
+    box-shadow: inset -300px 0 0 0 whitesmoke;
+    color: #0060cf;
+}

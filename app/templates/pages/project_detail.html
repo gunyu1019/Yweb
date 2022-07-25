@@ -1,0 +1,99 @@
+{% extends 'layout.html' %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/project_detail.css') }}">
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-viewer.js"></script>
+    {% include 'element/editor_head.html' %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/androidstudio.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+{% endblock %}
+{% block content %}
+    {% if is_admin %}
+        <!-- Modal / Delete Warning -->
+        <div class="modal fade" id="deleteWarning" tabindex="-1" aria-labelledby="title" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="title">정말로 게시글을 삭제하실건가요?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            <span id="modal-post-name">무언가</span>를 삭제하기 전에 다시 한번 확인해주세요.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니요</a>
+                        <a type="button" class="btn btn-primary" id="modal-accept">예</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Main Content -->
+    <div class="wrapper">
+        <div class="container content">
+            <div class="topic-group">
+                {% if project.icon != None %}
+                    <img src="data:image/png;base64,{{ project.icon_convert | safe }}" class="topic-image" />
+                {% endif %}
+                <div class="topic-text">
+                    <span class="topic-title">{{ project.title }}</span>
+                    <span class="topic-category">{{ category.name }}</span>
+                </div>
+                <div class="topic-button ms-auto">
+                    {% if project.github != None %}
+                        <a href="{{ project.github }}" class="topic-button-detail github">
+                            <i class="topic-button-icon fab fa-github"></i>
+                            <span class="topic-button-title">Source Code</span>
+                        </a>
+                    {% endif %}
+                    {% if project.website != None %}
+                        <a href="{{ project.website }}" class="topic-button-detail website">
+                            <i class="topic-button-icon fas fa-globe"></i>
+                            <span class="topic-button-title">Website</span>
+                        </a>
+                    {% endif %}
+                    {% if project.button != None %}
+                        <a href="{{ project.button.link }}" class="topic-button-detail">
+                            <i class="topic-button-icon {{ project.button.icon }}"></i>
+                            <span class="topic-button-title">{{ project.button.name }}</span>
+                        </a>
+                    {% endif %}
+                    {% if is_admin == True %}
+                        <a href="{{ url_for("project.project_edit", project_id=project.id) }}" class="topic-button-detail">
+                            <i class="topic-button-icon fas fa-edit"></i>
+                            <span class="topic-button-title">Edit</span>
+                        </a>
+                        <a data-bs-toggle="modal" data-bs-target="#deleteWarning" class="topic-button-detail delete">
+                            <i class="topic-button-icon fas fa-trash"></i>
+                            <span class="topic-button-title">Delete</span>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div id="contentViewer"></div>
+        </div>
+    </div>
+    <script>
+        const Viewer = toastui.Editor;
+        const { codeSyntaxHighlight } = Viewer.plugin;
+
+        const viewer = new Viewer({
+            el: document.querySelector('#contentViewer'),
+            theme: 'dark',
+            initialValue: `{{ project.content.replace('`', '\`') | safe }}`
+        });
+        {% if is_admin %}
+            const modal = document.getElementById('deleteWarning');
+            modal.addEventListener('show.bs.modal', function (event) {
+                const modalPost = modal.querySelector('.modal-body span#modal-post-name')
+                const modalAcceptButton = modal.querySelector('.modal-footer a#modal-accept')
+
+                modalPost.textContent = '{{ project.title }}'
+                modalAcceptButton.href = '/projects/api/delete/{{ project.id }}'
+            });
+        {% endif %}
+        hljs.highlightAll();
+    </script>
+{% endblock %}

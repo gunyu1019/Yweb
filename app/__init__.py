@@ -1,0 +1,49 @@
+import importlib.util
+import logging
+import os
+
+from flask import Flask
+from app.directory import directory
+from app.config.config import get_config
+
+
+def create_app():
+    parser = get_config()
+
+    app = Flask(__name__)
+    app.config['JSON_AS_ASCII'] = False
+    app.secret_key = parser.get('Flask', 'secret_key')
+    log = logging.getLogger("app.create_app")
+
+    views = [
+        "app.views." + file[:-3] for file in os.listdir(
+            os.path.join(directory, "views")
+        ) if file.endswith(".py")
+    ]
+    for view in views:
+        spec = importlib.util.find_spec(view)
+        if spec is None:
+            log.error("Extension Not Found: {0}".format(view))
+            continue
+
+        lib = importlib.util.module_from_spec(spec)
+        try:
+            spec.loader.exec_module(lib)  # type: ignore
+        except Exception as e:
+            log.error("Extension Failed: {0} ({1})".format(view, e.__class__.__name__))
+            raise e
+            continue
+
+        try:
+            blueprint = getattr(lib, 'bp')
+        except AttributeError:
+            log.error("No Entry Point Error: {0}".format(view))
+            continue
+
+        try:
+            app.register_blueprint(blueprint)
+        except Exception as e:
+            log.error("Extension Failed: {0} ({1})".format(view, e.__class__.__name__))
+            continue
+
+    return app

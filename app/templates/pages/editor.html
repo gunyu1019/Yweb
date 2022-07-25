@@ -1,0 +1,147 @@
+{% extends 'layout.html' %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/editor.css') }}">
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css"/>
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+    {% include 'element/editor_head.html' %}
+    <script src="https://uicdn.toast.com/editor/latest/i18n/ko-kr.js"></script>
+{% endblock %}
+{% block content %}
+    <div class="container content">
+        <form action="{{ redirect_url | default(url_for('project_api._project_new')) }}" method="{{ method | default('post') }}" enctype="application/x-www-form-urlencoded" id="form">
+            <input spellcheck="false" autocomplete="off" id="content" name="content" value="{{ default_content }}" style="display: none;" readonly>
+
+            <span class="title">제목</span>
+            <input id="form-title" class="form-input" spellcheck="false" type="text" autocomplete="off" value="{{ default_title }}" name="title" required>
+
+            <span class="title">내용</span>
+            <div id="contentEditior" style="color: white;"></div>
+
+            <input spellcheck="false" autocomplete="off" id="categoryId" name="categoryId" value="{{ default_category | default(categories[0].id) }}" style="display: none;" readonly>
+            <div class="separate">
+                <div class="image separate-item">
+                    <span class="title">로고</span>
+                    <input id="form-image" class="form-input" spellcheck="false" type="text" autocomplete="off" value="" name="image" style="display: none">
+                    <input type="file" name="image-file" id="file-image" style="display: none" onchange="onUpload(this)">
+                    <div class="image-button-group">
+                        <label class="image-button" for="file-image">업로드</label>
+                        <a class="image-button" id="cancel-button" onclick="onCancel(this)" style="display: none" >취소</a>
+                    </div>
+                    <img src="" id="previewImage" class="image-preview" style="{% if not default_image %}display: none;{% endif %}">
+                </div>
+                <div class="separate-item">
+                    <span class="title">카테고리</span>
+                    <select class="selection form-input" id="categorySelection" onchange="onChangeCategory(this.value);">
+                        {% for category in categories %}
+                            <option value="{{ category.id }}">{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <span class="title">프로그래밍 언어</span>
+                    {% for language in languages %}
+                        <label class="checkbox">{{ language.name }}
+                            <input type="checkbox" id="language-{{ language.id_string }}" name="language-{{ language.id_string }}" value="{{ language.id }}" {% if language.contain(default_language | default(0)) %}checked{% endif %} >
+                            <span class="checkbox-marked"></span>
+                        </label>
+                    {% endfor %}
+
+                    <span class="title">개발 날짜</span>
+                    <input type="date" id="created-at" name="created-at" class="form-input">
+                </div>
+            </div>
+
+            <span class="title">깃허브</span>
+            <input id="form-title" class=" form-input" spellcheck="false" type="url" autocomplete="off" value="{{ default_github | default() }}" name="github">
+
+            <span class="title">웹사이트</span>
+            <input id="form-title" class=" form-input" spellcheck="false" type="url" autocomplete="off" value="{{ default_website | default() }}" name="website">
+
+            <div class="separate">
+                <div class="separate-item">
+                    <span class="title">버튼 이름</span>
+                    <input spellcheck="false" autocomplete="off" value="{{ (default_button | default(None)).name }}" name="button-name" class="form-input">
+                </div>
+                <div class="separate-item">
+                    <span class="title">버튼 이미지 (fontawesome)</span>
+                    <input spellcheck="false" autocomplete="off" value="{{ (default_button | default(None)).icon }}" name="button-icon" class="form-input">
+                </div>
+            </div>
+
+            <span class="title">버튼 링크</span>
+            <input id="form-title" class=" form-input" spellcheck="false" type="url" autocomplete="off" value="{{ (default_button | default(None)).link }}" name="button-link">
+            <div class="bottom-button-group">
+                <input class="request-button" type="submit" value="{{ submit_message | default('등록하기') }}">
+            </div>
+        </form>
+    </div>
+    <script>
+        const Editor = toastui.Editor;
+        const form = document.getElementById("form")
+        const imageInput = document.getElementById("form-image")
+        const imageFile = document.getElementById("file-image")
+        const imagePreview = document.getElementById("previewImage")
+        const cancelButton = document.getElementById("cancel-button")
+        const { codeSyntaxHighlight, colorSyntax, tableMergedCell, uml } = Editor.plugin;
+        let upload = false
+
+        const width = $(window).width();
+        if (width <= 1024) {
+            previewStyle = 'tab'
+        } else {
+            previewStyle = 'vertical'
+        }
+
+        const editor = new Editor({
+            el: document.querySelector('#contentEditior'),
+            height: '600px',
+            initialEditType: 'markdown',
+            previewStyle: previewStyle,
+            language: 'ko-KR',
+            theme: 'dark',
+            initialValue: `{{ (default_content | default('') | safe).replace('`', '\`') }}`,
+            extendedAutolinks: true,
+            plugins: [codeSyntaxHighlight, colorSyntax, tableMergedCell, uml],
+            events: {
+            change: function() {
+                document.getElementById("content").value = editor.getMarkdown().replaceAll('\n', '\\n')
+            },
+          }
+        });
+
+        function onUpload(_) {
+            upload = true
+            imageInput.value = imageFile.value
+            imagePreview.style.display = 'block'
+            cancelButton.style.display = 'block'
+            if (imageFile.files && imageFile.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    imagePreview.src = e.target.result;
+                }
+                reader.readAsDataURL(imageFile.files[0]);
+            }
+
+            form.enctype = 'multipart/form-data'
+        }
+        function onCancel(_) {
+            upload = false
+            imageInput.value = ''
+            imageFile.value = ''
+            imagePreview.style.display = 'none'
+            cancelButton.style.display = 'none'
+
+            form.enctype = 'application/x-www-form-urlencoded'
+        }
+        function onChangeCategory(selection) {
+            document.getElementById("categoryId").value = selection
+        }
+        document.getElementById("categorySelection").value = "{{ default_category | default(1) }}"
+        document.getElementById("created-at").value = "{{ default_datetime | default() }}"
+        if ("{{ default_image | default("data:image/png;base64,None") }}" !== "data:image/png;base64,None") {
+            upload = true
+            imagePreview.style.display = 'block'
+            cancelButton.style.display = 'block'
+            imagePreview.src = '{{ default_image | safe }}'
+        }
+    </script>
+{% endblock %}
